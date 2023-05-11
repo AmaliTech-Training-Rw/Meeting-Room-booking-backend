@@ -76,3 +76,7 @@ meeting_rooms/
 ├── .gitignore
 ├── manage.py
 └── Pipfile
+
+# git conventions
+
+https://www.conventionalcommits.org/en/v1.0.0-beta.4/#summary
