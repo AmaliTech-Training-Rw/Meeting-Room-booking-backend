@@ -130,3 +130,6 @@ dmypy.json
 
 # Mac os hidden file
 .DS_Store
+
+# IntelliJ IDE
+.idea/
