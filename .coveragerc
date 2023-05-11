@@ -1,0 +1,15 @@
+[run]
+omit =
+    # omit anything in a tests directory anywhere
+    */tests/*
+    # omit static
+    */static/*
+    # omit anything in a templates directory
+    */templates/*
+    */__init__.py
+    # omit settings generated code
+    */migrations/*
+    */asgi.py
+    */settings.py
+    */urls.py
+    */wsgi.py
