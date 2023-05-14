@@ -133,3 +133,6 @@ dmypy.json
 
 # IntelliJ IDE
 .idea/
+
+# static files
+static/*
