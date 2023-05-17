@@ -1,0 +1,16 @@
+# Ignore everything
+# Git
+docs/
+.gitignore
+.git
+
+# Docker
+.docker
+*/__pycache__/
+*/*/__pycache__/
+
+# Local PostgreSQL data
+data/
+htmlcov/
+.coverage
+.idea/

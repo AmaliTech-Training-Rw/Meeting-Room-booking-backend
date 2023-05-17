@@ -1,0 +1,31 @@
+name: Build-dev (CI)
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install python, pipenv
+        uses: palewire/install-python-pipenv-pipfile@bbbd75e2eb923b7d3825c02417b00a9a72333ad4
+        with:
+            python-version: 3.9
+
+      - run: pipenv install
+      - run: pipenv run coverage run --source='.' --branch  manage.py test -v 2
+      - run: pipenv run coverage report
+  build-code-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install python, pipenv
+        uses: palewire/install-python-pipenv-pipfile@bbbd75e2eb923b7d3825c02417b00a9a72333ad4
+        with:
+          python-version: 3.9
+
+      - run: pipenv install
+      - run: pipenv run flake8

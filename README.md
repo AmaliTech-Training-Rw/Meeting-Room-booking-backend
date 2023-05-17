@@ -1,3 +1,6 @@
+# Build 
+[![Build-dev (CI)](https://github.com/AmaliTech-Training-Rw/Meeting-Room-booking-backend/actions/workflows/build-ci-dev.yml/badge.svg)](https://github.com/AmaliTech-Training-Rw/Meeting-Room-booking-backend/actions/workflows/build-ci-dev.yml)
+
 # Development tools
  - Django core processing engine
  - Postgres for data storage 
@@ -5,8 +8,8 @@
  - Redis for cashing
  - mongodb for no-sql related tasks like rooms
  - testing tools with Coverage setup 
- - sonarque connected to github
- - At beginning, we don't want use docker. we will introduce it later if necessary.
+ - sonarQube connected to GitHub
+ - At beginning,  docker is not used. we will introduce it later if necessary.
  - AWS S3 storage
  - email sender service
  - Queue will be introduced later
@@ -15,12 +18,12 @@
  - Pipeline from local machine to AWS 
  - Git actions should be preferred since they are easy to use
  - infrastructure as code, we should be able to create/destroy all resources in one click
- - Merge to main triggers production deployement
+ - Merge to main triggers production deployment
  - Merge to test triggers test deployment
  - Other branches commits triggers dev deployment
- - Each deployent should trigger, build, run unit tests and integration tests, sonarQube checks, smoke test run
- - SonarResult should be visible within github repository
- - Integration between Jira and Github 
+ - Each deployment should trigger, build, run unit tests and integration tests, sonarQube checks, smoke test run
+ - SonarResult should be visible within GitHub repository
+ - Integration between Jira and GitHub 
  - integrate with cloudwatch to monitor application, this setup could be delayed later
 
 
@@ -76,3 +79,9 @@ meeting_rooms/
 ├── .gitignore
 ├── manage.py
 └── Pipfile
+
+# Git Special conventions
+
+https://www.conventionalcommits.org/en/v1.0.0-beta.4/#summary
+
+
