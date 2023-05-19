@@ -55,3 +55,41 @@ class MyAccountManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+class Account(AbstractBaseUser, PermissionsMixin):
+    ORG_TYPE_CHOICES=[
+        ("Restaurants","Restaurants"),
+        ("Fast Food","Fast Food"),
+        ("Coffee","Coffee"),
+        ("Hotel","Hotel"),
+        ("School","School"),
+        ("Medical","Medical"),
+        ("Pharmacy","Pharmacy"),
+        ("Culture","Culture"),
+        ("Corporate","Corporate"),
+        ("Non Profit","Non Profit"),
+        ("Individual","Individual"),
+        ("Religious","Religious"),
+        ("Business","Business"),
+        ("Embassy","Embassy"),
+        ("Night Life","Night Life"),
+    ]
+    username= models.CharField(max_length=30, unique=True)
+    organization_name=models.CharField(verbose_name="Organization name",max_length=60)
+    email = models.EmailField(verbose_name="Email", max_length=60,unique=True)
+    type_of_organization=models.CharField(max_length=30,choices=ORG_TYPE_CHOICES)
+    location=models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
+    password=models.CharField(verbose_name="Password",max_length=300)
+    confirm_password=models.CharField(verbose_name="Confirm Password",max_length=30)
+    is_admin= models.BooleanField(default=False)
+    is_active= models.BooleanField(default=True)
+    is_staff= models.BooleanField(default=False)
+    is_superuser=models.BooleanField(default=False)
+    hide_email= models.BooleanField(default=True)
+    
+    objects = MyAccountManager()
+    
+    USERNAME_FIELD='username'
+    REQUIRED_FIELDS=['email']
+    
+    def __str__(self):
+        return self.username
