@@ -46,3 +46,18 @@ class MyAccountManagerTestCase(TestCase):
     def test_create_superuser_required_fields(self):
         with self.assertRaises(ValueError):
             self.manager.create_superuser(email='', username='', password=self.password, location=self.location)
+
+class AccountTestCase(TestCase):
+    def setUp(self):
+        self.location = Location.objects.create(city_name='Test City', country_name='Test Country')    
+        self.user = Account.objects.create_user(
+            email='test@example.com',
+            username='testuser',
+            password='testpassword',
+            location=self.location
+            
+           
+        )
+
+    def test_str_representation(self):
+        self.assertEqual(str(self.user), 'testuser')
