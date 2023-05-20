@@ -9,3 +9,9 @@ class Room(models.Model):
 
     def __str__(self):
         return self.name
+class Location(models.Model):
+    city_name =models.CharField(max_length=50)
+    country_name =models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.city_name

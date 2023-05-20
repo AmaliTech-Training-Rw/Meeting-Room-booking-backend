@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
-from account.models import Account
+from .models import Account
 
 class RegistrationSerializer(serializers.ModelSerializer):
     confirm_password= serializers.CharField(style={'input_type':'password'},write_only=True)

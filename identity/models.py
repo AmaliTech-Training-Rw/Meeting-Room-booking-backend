@@ -23,24 +23,6 @@ class MyAccountManager(BaseUserManager):
         )
         user.set_password(password)
         user.save(using=self._db)
-        # Assign the user to the Manager-admins group
-        # try:
-        #     group = Group.objects.get(name='Manager-admins')
-        #     print(group)
-        # except Group.DoesNotExist:
-        #     # Handle the case when the group doesn't exist
-        #     raise ValueError("The specified group does not exist.")
-        
-        # user.groups.add(group)
-        
-       
-        '''
-            For adding custom permissions after creating them do:
-            
-            permission = Permission.objects.get(codename='your_permission_codename')  # Replace 'your_permission_codename' with the actual permission codename
-            user.user_permissions.add(permission)
-        
-        '''
         return user
     
     def create_superuser(self, email, username, password, location=None):
