@@ -1,10 +1,13 @@
-FROM nginx
+FROM nginx:latest
 
-COPY ./default.conf /etc/nginx/config.d/default.conf
+COPY ./default.conf /etc/nginx/conf.d/default.conf
 
-USER root
 
-RUN mkdir -p /vol/static
-RUN chmod 755 /vol/static
 
-USER nginx
+#
+#USER root
+#
+#RUN mkdir -p /vol/static
+#RUN chmod 755 /vol/static
+#
+#USER nginx
