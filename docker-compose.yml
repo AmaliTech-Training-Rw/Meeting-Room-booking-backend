@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  web:
+  web_gunicorn:
     platform: linux/amd64
     build:
       context: .
@@ -12,6 +12,7 @@ services:
     environment:
       - DEBUG=1
       - SECRET_KEY=django-insecure-y_h^@-1ixe3wyi6&+(1uaq04wejb1%r5lw@bq43+pcxlm2!02b
+      - ALLOWED_HOSTS=*
       - DB_HOST=db
       - DB_NAME=mrb_db
       - DB_USER=mrb_user
@@ -27,6 +28,15 @@ services:
       - POSTGRES_PASSWORD=mrb_password123
       - POSTGRES_USER=mrb_user
       - POSTGRES_DB=mrb_db
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - web_gunicorn
 volumes:
   postgres_data:
     driver: local
