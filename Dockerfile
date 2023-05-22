@@ -45,11 +45,13 @@ COPY . /app
 #RUN useradd --create-home appuser
 RUN chmod 777 -R /app
 # Creates a non-root user and adds permission to access the /app folder
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+#RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 
+RUN adduser -D appuser
+RUN chown appuser:appuser -R /app/
+RUN chmod +x /app
 USER appuser
 
-WORKDIR /app
 
 # Install application into container
 #COPY . .
