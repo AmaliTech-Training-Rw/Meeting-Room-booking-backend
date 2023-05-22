@@ -37,17 +37,19 @@ RUN python -m pip install --upgrade pip && \
 #COPY --from=python-deps /.venv /.venv
 #ENV PATH="./.venv/bin:$PATH"
 
-# Install application into container
+## Install application into container
 WORKDIR /app
 COPY . /app
 
 # Create and switch to a new user
 #RUN useradd --create-home appuser
-
+RUN chmod 777 -R /app
 # Creates a non-root user and adds permission to access the /app folder
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-#WORKDIR /home/appuser
+
 USER appuser
+
+WORKDIR /app
 
 # Install application into container
 #COPY . .
