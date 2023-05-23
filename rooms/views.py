@@ -17,23 +17,22 @@
 #                     request (Request): The HTTP request object.
 
 #                 Returns:
-#                     Response: A JsonResponse and a status code indicating the successful query of books or any other error.""",
+#                     Response: A JsonResponse and a status code indicating the successful query of books or 
+                        # any other error.""",
 #         responses={
 #             200: openapi.Response(
 #                 description="Get books successful",
 #                 schema=  BookSerializer(),
 #                 examples={
 #                     "application/json": 
-#                     BookSerializer(Book.objects.first()).data,
-                    
+#                     BookSerializer(Book.objects.first()).data,                  
 #                 },
-#             ), 
+#             ),
 #               404: openapi.Response(
 #                 description="Get books failed",
 #                 examples={
-#                     "application/json": 
+#                     "application/json":
 #                    {"message":"Books not found"}
-                    
 #                 },
 #             )
 #         },
