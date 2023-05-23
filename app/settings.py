@@ -48,15 +48,14 @@ INSTALLED_APPS = [
     'rooms',
     'identity',
 ]
-AUTH_USER_MODEL= "identity.Account"
+AUTH_USER_MODEL = "identity.Account"
 
 # I added this for backend authentication for custom user model
 AUTHENTICATION_BACKENDS = [
     # 'django.contrib.auth.backends.ModelBackend',
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
-    'identity.backends.CaseInsensitiveModelBackend'
-    
-]
+    'identity.backends.CaseInsensitiveModelBackend',
+    ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

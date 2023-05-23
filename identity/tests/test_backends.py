@@ -4,13 +4,15 @@ from rooms.models import Location
 from django.test import TestCase
 from django.http.request import HttpRequest
 
+
 class CaseInsensitiveModelBackendTest(TestCase):
 
     def setUp(self):
         self.backend = CaseInsensitiveModelBackend()
         self.location = Location.objects.create(city_name='Test City', country_name='Test Country')
         self.user_model = get_user_model()
-        self.user = self.user_model.objects.create_user(username='testuser', email='test@example.com', password='testpassword', location=self.location)
+        self.user = self.user_model.objects.create_user(username='testuser', email='test@example.com',
+                                                        password='testpassword', location=self.location)
 
     def test_authenticate_with_correct_credentials(self):
         # Test authentication with correct credentials
@@ -34,4 +36,5 @@ class CaseInsensitiveModelBackendTest(TestCase):
         # Test authentication with a case-insensitive username
         request = HttpRequest()
         user = self.backend.authenticate(request, username='TESTUSER', password='testpassword')
-        self.assertEqual(user, self.user)
+        self.assertEqual(user, self.user)        
+        
