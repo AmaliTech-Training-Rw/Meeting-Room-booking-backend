@@ -16,7 +16,7 @@ class AccountAdmin(UserAdmin):
     list_filter = ()
     fieldsets = ()
     # For adding the customer user to a group in the admin dashboard
-                    
+
     def add_selected_to_group(self, request, queryset):
         group = Group.objects.get(name='Manager-admins')  # Replace 'Your Group Name' with the actual group name
         for user in queryset:

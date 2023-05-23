@@ -16,8 +16,8 @@ class MyAccountManagerTestCase(TestCase):
         self.manager = MyAccountManager()
         self.email = 'test@example.com'
         self.username = 'testuser'
-        self.password = 'testpassword'                                
-        
+        self.password = 'testpassword'
+
         # Create a Location object
         self.location = Location.objects.create(city_name='Test City', country_name='Test Country')
 
@@ -58,7 +58,7 @@ class AccountTestCase(TestCase):
             username='testuser',
             password='testpassword',
             location=self.location,
-            )
+        )
 
     def test_str_representation(self):
         self.assertEqual(str(self.user), 'testuser')

@@ -19,7 +19,7 @@ class MyAccountManager(BaseUserManager):
         )
         user.set_password(password)
         user.save(using=self._db)
-        return user        
+        return user
 
     def create_superuser(self, email, username, password, location=None):
         user = self.create_user(
@@ -65,11 +65,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     hide_email = models.BooleanField(default=True)
-                    
     objects = MyAccountManager()
-                    
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
-                        
+
     def __str__(self):
         return self.username

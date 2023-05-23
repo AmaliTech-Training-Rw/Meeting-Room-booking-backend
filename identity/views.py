@@ -6,7 +6,7 @@ from .serializers import RegistrationSerializer, LoginSerializer
 # Create your views here.
 
 
-@api_view(['POST',])
+@api_view(['POST'])
 def registration_view(request):
     if request.method == 'POST':
         serializer = RegistrationSerializer(data=request.data)
@@ -35,7 +35,7 @@ def login_view(request):
                 'username': user.username
             }
             return Response(data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -44,4 +44,3 @@ def logout_view(request):
         # Call Django's logout function to log out the user
         logout(request)
         return Response({'detail': 'Successfully logged out.'}, status=status.HTTP_200_OK)
-    

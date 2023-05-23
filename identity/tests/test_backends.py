@@ -36,5 +36,4 @@ class CaseInsensitiveModelBackendTest(TestCase):
         # Test authentication with a case-insensitive username
         request = HttpRequest()
         user = self.backend.authenticate(request, username='TESTUSER', password='testpassword')
-        self.assertEqual(user, self.user)        
-        
+        self.assertEqual(user, self.user)

@@ -5,14 +5,14 @@ from .models import Account
 
 class RegistrationSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
-                
+
     class Meta:
         model = Account
         fields = ['username', 'organization_name', 'email', 'type_of_organization', 'location', 'password', 'confirm_password']
         extra_kwargs = {
             'password': {'write_only': True}
         }
-                    
+
     def save(self):
         account = Account(
             email=self.validated_data['email'],
@@ -48,4 +48,3 @@ class LoginSerializer(serializers.Serializer):
         else:
             raise serializers.ValidationError("Must include 'username' and 'password'.")
         return data
-        
