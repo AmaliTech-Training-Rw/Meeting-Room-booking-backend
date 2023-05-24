@@ -137,3 +137,5 @@ dmypy.json
 
 # static files
 static/*
+.github/workflows/
+.vscode
