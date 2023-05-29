@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'change')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 ALLOWED_HOSTS.extend(
     filter(
         None,
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rooms',
+    'drf_yasg',
     'rest_framework',
     'rooms',
     'identity',
