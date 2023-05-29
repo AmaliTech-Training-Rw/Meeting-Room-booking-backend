@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'change')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(os.environ.get('DEBUG', 0)))
+DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
 ALLOWED_HOSTS = ['127.0.0.1']
 ALLOWED_HOSTS.extend(
@@ -46,9 +46,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rooms',
     'drf_yasg',
-    'rest_framework'
+    'rest_framework',
+    'rooms',
+    'identity',
 ]
+AUTH_USER_MODEL = "identity.Account"
 
+# I added this for backend authentication for custom user model
+AUTHENTICATION_BACKENDS = [
+    # 'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.AllowAllUsersModelBackend',
+    'identity.backends.CaseInsensitiveModelBackend',
+    ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -95,7 +104,7 @@ DATABASES = {
     #     "PASSWORD": os.environ.get('DB_PASS', ''),
     #     "HOST": os.environ.get('DB_HOST', ''),
     #     "PORT": os.environ.get('DB_PORT', '5432'),
-    # }
+    # },
 }
 
 
