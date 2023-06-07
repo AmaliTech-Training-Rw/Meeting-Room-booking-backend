@@ -58,7 +58,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     organization_name = models.CharField(verbose_name="Organization name", max_length=60)
     email = models.EmailField(verbose_name="Email", max_length=60, unique=True)
     type_of_organization = models.CharField(max_length=30, choices=ORG_TYPE_CHOICES)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, default=1, null=True)
     password = models.CharField(verbose_name="Password", max_length=300)
     confirm_password = models.CharField(verbose_name="Confirm Password", max_length=30)
     is_admin = models.BooleanField(default=False)
