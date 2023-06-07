@@ -2,6 +2,7 @@ from django.db import models
 from rooms.models import Location
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.tokens import default_token_generator
 
 
 class MyAccountManager(BaseUserManager):
@@ -57,7 +58,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     organization_name = models.CharField(verbose_name="Organization name", max_length=60)
     email = models.EmailField(verbose_name="Email", max_length=60, unique=True)
     type_of_organization = models.CharField(max_length=30, choices=ORG_TYPE_CHOICES)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, default=1, null=True)
     password = models.CharField(verbose_name="Password", max_length=300)
     confirm_password = models.CharField(verbose_name="Confirm Password", max_length=30)
     is_admin = models.BooleanField(default=False)
@@ -71,3 +72,15 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+
+class PasswordResetToken(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    token = models.CharField(max_length=255, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def generate_token(cls, user):
+        token = default_token_generator.make_token(user)
+        cls.objects.create(user=user, token=token)
+        return token
