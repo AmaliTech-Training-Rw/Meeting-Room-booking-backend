@@ -2,6 +2,7 @@ from django.db import models
 from rooms.models import Location
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.tokens import default_token_generator
 
 
 class MyAccountManager(BaseUserManager):
@@ -71,3 +72,15 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+
+class PasswordResetToken(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    token = models.CharField(max_length=255, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def generate_token(cls, user):
+        token = default_token_generator.make_token(user)
+        cls.objects.create(user=user, token=token)
+        return token

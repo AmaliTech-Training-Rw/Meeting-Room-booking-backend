@@ -1,8 +1,10 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.contrib.auth import logout
-from .serializers import RegistrationSerializer, LoginSerializer
+from django.contrib.auth import logout, get_user_model
+from django.shortcuts import get_object_or_404
+from .serializers import (RegistrationSerializer, LoginSerializer,
+                          PasswordResetSerializer, PasswordResetConfirmSerializer)
 # Create your views here.
 
 
@@ -44,3 +46,31 @@ def logout_view(request):
         # Call Django's logout function to log out the user
         logout(request)
         return Response({'detail': 'Successfully logged out.'}, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def password_reset_view(request):
+    if request.method == 'POST':
+        serializer = PasswordResetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(request)
+            return Response({'detail': 'Password reset email sent.'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def password_reset_confirm_view(request, token):
+    print(request)
+    if request.method == 'POST':
+
+        serializer = PasswordResetConfirmSerializer(data=request.data, context={'request': request, 'token': token})
+
+        if serializer.is_valid():
+            user_name = get_object_or_404(get_user_model(), passwordresettoken__token=token)
+            User = get_user_model()
+            user_model = User.objects.get(username=user_name)
+
+            serializer.save(token, user_model)
+            return Response({'detail': 'Password reset successful.'}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
