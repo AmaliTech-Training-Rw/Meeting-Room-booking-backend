@@ -35,6 +35,22 @@ ALLOWED_HOSTS.extend(
     )
 )
 
+
+FRONTEND_URL = 'http://localhost:8000'
+
+# SMTP configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True  # Or False if your SMTP server doesn't use TLS
+EMAIL_USE_SSL = False
+
+# Default email address to use for various automated correspondence
+# DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+DEFAULT_FROM_EMAIL = 'grace.umutesi@amalitech.org'
+
 # Application definition
 
 INSTALLED_APPS = [
